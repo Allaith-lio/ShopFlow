@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopFlow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <section
+      id="loginPage"
+      class="loginPage"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="loginHeading"
+    >
+      <div class="loginPanel">
+        <div class="loginIntro">
+          <a class="loginLogo" href="#Home">ShopFlow</a>
+          <div class="loginIntroContent">
+            <span class="loginEyebrow">A simpler way to shop</span>
+            <h1 id="loginHeading">Everything you need, all in one place.</h1>
+            <p>
+              Discover thoughtfully selected products, explore customer
+              favorites, and find what you need with a smoother shopping
+              experience.
+            </p>
+            <div class="loginIntroNote">
+              <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+              <span>Find your next favorite with ShopFlow.</span>
+            </div>
+          </div>
+          <span class="loginCopyright">Your everyday shopping destination</span>
+        </div>
+
+        <div class="loginFormSide">
+          <div class="loginFormHeader">
+            <span class="loginFormIcon">
+              <i class="fa-regular fa-user" aria-hidden="true"></i>
+            </span>
+            <p class="loginEyebrow">Welcome to ShopFlow</p>
+            <h2>Sign in to continue</h2>
+            <p>Enter your details to explore the store.</p>
+          </div>
+
+          <form id="loginForm" class="loginForm">
+            <label for="loginUsername">Username</label>
+            <div class="loginInputWrap">
+              <i class="fa-regular fa-user" aria-hidden="true"></i>
+              <input
+                id="loginUsername"
+                name="username"
+                type="text"
+                placeholder="Your name"
+                autocomplete="username"
+                minlength="2"
+                required
+              />
+            </div>
+
+            <label for="loginEmail">Email address</label>
+            <div class="loginInputWrap">
+              <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+              <input
+                id="loginEmail"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <label for="loginPassword">Password</label>
+            <div class="loginInputWrap">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              <input
+                id="loginPassword"
+                name="password"
+                type="password"
+                placeholder="At least 8 characters"
+                autocomplete="current-password"
+                minlength="8"
+                required
+              />
+            </div>
+
+            <p id="loginMessage" class="loginMessage" role="alert" hidden></p>
+            <button class="loginSubmit" type="submit">
+              Login <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          <p class="loginPrivacyNote">
+            Demo only: no real account is verified. Your name and email are
+            saved on this device; your password is never saved.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <nav>
+      <div class="navContainer">
+        <div class="logo">ShopFlow</div>
+        <div class="links">
+          <a href="#Home">Home</a>
+          <a href="#TopSales">Top Sales</a>
+          <a href="#Products">Products</a>
+          <a href="#About">About</a>
+          <button
+            id="themeToggle"
+            class="themeToggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            aria-pressed="false"
+            title="Switch to dark mode"
+          >
+            <span class="themeToggleIcon" aria-hidden="true">
+              <i class="fa-solid fa-moon"></i>
+            </span>
+            <span class="themeToggleText">Dark</span>
+          </button>
+          <button
+            id="accountToggle"
+            class="accountToggle"
+            type="button"
+            aria-label="Open your profile and shopping cart"
+            aria-controls="accountSidebar"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+            <span id="cartCount" class="cartCount" aria-label="Items in cart"
+              >0</span
+            >
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="accountBackdrop" class="accountBackdrop" hidden></div>
+    <aside
+      id="accountSidebar"
+      class="accountSidebar"
+      aria-labelledby="accountTitle"
+      aria-hidden="true"
+      inert
+    >
+      <div class="sidebarHeader">
+        <div>
+          <span class="sidebarEyebrow">Your ShopFlow</span>
+          <h2 id="accountTitle">Account & cart</h2>
+        </div>
+        <button
+          id="accountClose"
+          class="sidebarClose"
+          type="button"
+          aria-label="Close account sidebar"
+        >
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <section class="profileSummary" aria-label="Your profile">
+        <span class="profileAvatar">
+          <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+        </span>
+        <div class="profileDetails">
+          <strong id="profileUsername">ShopFlow shopper</strong>
+          <span id="profileEmail">Sign in to see your account</span>
+        </div>
+      </section>
+
+      <section class="cartSection" aria-labelledby="cartTitle">
+        <div class="cartSectionHeader">
+          <div>
+            <h3 id="cartTitle">Your cart</h3>
+            <p id="cartItemSummary">0 items</p>
+          </div>
+          <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+        </div>
+
+        <div id="cartItems" class="cartItems" aria-live="polite"></div>
+
+        <div class="cartFooter">
+          <div class="cartTotalRow">
+            <span>Total</span>
+            <strong id="cartTotal">$0.00</strong>
+          </div>
+          <button id="checkoutButton" class="checkoutStart" type="button" disabled>
+            Continue to checkout
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+    </aside>
+
+    <div id="checkoutBackdrop" class="checkoutBackdrop" hidden>
+      <section
+        id="checkoutDialog"
+        class="checkoutDialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkoutTitle"
+        tabindex="-1"
+      >
+        <header class="checkoutHeader">
+          <div class="checkoutBrand">
+            <span class="checkoutBrandIcon">
+              <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+            </span>
+            <div>
+              <span class="checkoutEyebrow">ShopFlow checkout</span>
+              <h2 id="checkoutTitle">Review your order</h2>
+            </div>
+          </div>
+          <button
+            id="checkoutClose"
+            class="checkoutClose"
+            type="button"
+            aria-label="Close checkout"
+          >
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </header>
+
+        <form id="checkoutForm" class="checkoutForm">
+          <div class="checkoutLayout">
+            <div class="checkoutMain">
+              <section class="checkoutOrderPanel" aria-labelledby="checkoutItemsTitle">
+                <div class="checkoutSectionHeading">
+                  <span class="checkoutStep">01</span>
+                  <div>
+                    <h3 id="checkoutItemsTitle">Your items</h3>
+                    <p>Check quantities and prices before confirming.</p>
+                  </div>
+                </div>
+                <div id="checkoutItems" class="checkoutOrderItems"></div>
+              </section>
+
+              <section class="shamCashPanel" aria-labelledby="shamCashTitle">
+                <div class="shamCashHeading">
+                  <img
+                    class="shamCashLogo"
+                    src="https://shamcash.sy/_next/static/media/logo.5be69def.svg"
+                    alt="Sham Cash logo"
+                  />
+                  <div>
+                    <span class="shamCashLabel">PAYMENT METHOD</span>
+                    <h3 id="shamCashTitle">Sham Cash</h3>
+                  </div>
+                </div>
+                <div class="shamCashDetails">
+                  <div>
+                    <span>Payment provider</span>
+                    <strong>Sham Cash</strong>
+                  </div>
+                  <div>
+                    <span>Order amount</span>
+                    <strong id="checkoutTransferAmount">$0.00</strong>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="checkoutSummary" aria-label="Checkout total">
+              <div class="checkoutSectionHeading">
+                <span class="checkoutStep">02</span>
+                <div>
+                  <h3>Order total</h3>
+                  <p>Final amount for your order.</p>
+                </div>
+              </div>
+              <div class="checkoutTotalLine">
+                <span id="checkoutItemCount">0 items</span>
+                <span id="checkoutSubtotal">$0.00</span>
+              </div>
+              <div class="checkoutGrandTotal">
+                <span>Total due</span>
+                <strong id="checkoutTotal">$0.00</strong>
+              </div>
+              <label class="checkoutConsent">
+                <input id="checkoutConsent" type="checkbox" required />
+                <span>I understand this saves the order in this browser only.</span>
+              </label>
+              <p id="checkoutError" class="checkoutError" role="alert" hidden></p>
+              <button class="checkoutSubmit" type="submit">
+                Save order
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <p class="checkoutSecureNote">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                Payment processing is not connected.
+              </p>
+            </aside>
+          </div>
+        </form>
+
+        <section id="checkoutSuccess" class="checkoutSuccess" aria-live="polite" hidden>
+          <span class="checkoutSuccessIcon">
+            <i class="fa-solid fa-check" aria-hidden="true"></i>
+          </span>
+          <span class="checkoutEyebrow">Order saved</span>
+          <h3>Your order is saved</h3>
+          <p id="checkoutSuccessMessage"></p>
+          <p class="checkoutSuccessNote">
+            Saved to this browser. No payment was processed.
+          </p>
+          <button id="checkoutDone" class="checkoutSubmit" type="button">
+            Back to shopping
+          </button>
+        </section>
+      </section>
+    </div>
+
+    <section class="homeSec" id="Home">
+      <div class="home">
+        <h2>Everything you need in one place!</h2>
+        <p>
+          shopFlow is an online store that allows you to purchase a variety of
+          items from a single place, quickly and easily.
+        </p>
+        <button class="shopingBtn">Order Now</button>
+      </div>
+
+      <div class="homeImg">
+        <img
+          src="Free Stock Photos, PNGs, Templates & Mockups _ rawpixel.png"
+          alt="homeOverViewImage"
+        />
+      </div>
+    </section>
+
+    <section class="topSalesSec" id="TopSales">
+      <div class="headerSec">
+        <h3>Top Sales <i class="fa-solid fa-star"></i></h3>
+      </div>
+
+      <div class="cradsTopSales"></div>
+    </section>
+
+    <section class="productsSec" id="Products">
+      <div class="headerSecP">
+        <h3>You will find everything here</h3>
+      </div>
+      <div class="searchingFiltering">
+        <div class="searching">
+          <label for="searc">Search products</label>
+          <div>
+            <input
+              id="search"
+              type="search"
+              placeholder="Search for products..."
+            />
+            <button type="button" id="searchingBtn">
+              Search <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+          <div
+            id="errorMessage"
+            class="errorMessage"
+            role="alert"
+            aria-live="assertive"
+            hidden
+          >
+            <i
+              class="fa-solid fa-circle-exclamation errorMessageIcon"
+              aria-hidden="true"
+            ></i>
+            <span class="errorMessageText"></span>
+            <button
+              class="errorMessageClose"
+              type="button"
+              aria-label="Dismiss message"
+            >
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="filtering">
+          <label for="selecting">Choose a category</label>
+          <div class="filteringControls">
+            <select name="category" id="selecting">
+              <option value="" selected>All categories</option>
+              <option value="beauty">Beauty</option>
+              <option value="fragrances">Fragrances</option>
+              <option value="furniture">Furniture</option>
+              <option value="groceries">Groceries</option>
+              <option value="home-decoration">Home decoration</option>
+              <option value="smartphones">smartphones</option>
+              <option value="groceries">groceries</option>
+            </select>
+            <button type="button" id="filteringBtn">
+              Filter <i class="fa-solid fa-filter" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="productsContainer" class="productCards">
+        <!-- <div class="productCard">
+          <img
+            src="Free Stock Photos, PNGs, Templates & Mockups _ rawpixel.png"
+            alt="product"
+          />
+          <h3>CardTitle</h3>
+          <div class="cardinfo">
+            <h4>Category</h4>
+            <h3>Price:55.5$</h3>
+            <button>Buy Now</button>
+            <button>More Detalis</button>
+          </div>
+        </div> -->
+      </div>
+      <nav
+        id="productsPagination"
+        class="productsPagination"
+        aria-label="Product pages"
+        hidden
+      >
+        <button id="previousPage" class="paginationButton" type="button">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Previous
+        </button>
+        <span
+          id="paginationStatus"
+          class="paginationStatus"
+          aria-live="polite"
+        ></span>
+        <button id="nextPage" class="paginationButton" type="button">
+          Next <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </nav>
+      <div class="productDetalis" id="productDeltalis"></div>
+    </section>
+
+    <footer id="About">
+      <div class="footerMain">
+        <div class="footerBrand">
+          <a class="footerLogo" href="#Home">
+            <span class="footerLogoIcon">
+              <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+            </span>
+            ShopFlow
+          </a>
+          <p>
+            Find the things you love, all in one place. Browse customer
+            favorites and discover something new with ShopFlow.
+          </p>
+          <div class="footerSocials" aria-label="Social media">
+            <a href="https://www.instagram.com/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.facebook.com/" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.pinterest.com/" aria-label="Pinterest">
+              <i class="fa-brands fa-pinterest-p" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footerColumn">
+          <h3>Explore</h3>
+          <a href="#Home">Home</a>
+          <a href="#TopSales">Top sales</a>
+          <a href="#Products">All products</a>
+        </div>
+
+        <div class="footerColumn">
+          <h3>Popular labels</h3>
+          <div
+            class="footerBrands"
+            aria-label="Brands available in the catalog"
+          >
+            <span class="footerBrandName footerBrandGucci">GUCCI</span>
+            <span class="footerBrandName footerBrandAdidas">adidas</span>
+            <span class="footerBrandName footerBrandDior">Dior</span>
+          </div>
+          <p class="footerFinePrint">
+            A selection of brands found in our catalog.
+          </p>
+        </div>
+
+        <div class="footerColumn footerPaymentColumn">
+          <h3>Payment methods</h3>
+          <p>Checkout is a demo experience. No payment is collected.</p>
+          <div class="footerPayments" aria-label="Payment method examples">
+            <i class="fa-brands fa-cc-visa" aria-label="Visa"></i>
+            <i class="fa-brands fa-cc-mastercard" aria-label="Mastercard"></i>
+            <i class="fa-brands fa-paypal" aria-label="PayPal"></i>
+            <i class="fa-brands fa-apple-pay" aria-label="Apple Pay"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        <p>&copy; 2026 ShopFlow. All rights reserved.</p>
+        <p>
+          <i class="fa-solid fa-heart" aria-hidden="true"></i>
+          @Allaith Aljaesm
+        </p>
+      </div>
+    </footer>
+
+    <script src="JS/main.js"></script>
+  </body>
+</html>
